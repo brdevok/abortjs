@@ -1,0 +1,25 @@
+{
+  "name": "abort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsc -w",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "npx tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "npx tsc --module es2015 --outDir dist/esm",
+		"prettify": "npx prettier --write src",
+		"lint": "npx eslint src",
+		"lint:fix": "npx eslint src --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}
