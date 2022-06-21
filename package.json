@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"test": "npx jest --watchAll",
+    "test": "npx jest --watchAll",
     "dev": "npx tsc -w",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "npx tsc --module commonjs --outDir dist/cjs",
@@ -17,11 +17,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^28.1.2",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
+    "axios": "^0.27.2",
     "eslint": "^8.18.0",
     "jest": "^28.1.1",
     "prettier": "^2.7.1",
+    "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   }
 }
