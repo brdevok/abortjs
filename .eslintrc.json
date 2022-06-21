@@ -27,7 +27,6 @@
 			"no-template-curly-in-string": "error",
 			"no-unexpected-multiline": "error",
 			"no-unreachable": "error",
-			"no-unused-vars": "warn",
 			"no-unused-expressions": "warn",
 			"no-unused-labels": "warn",
 			"default-case": "error",
