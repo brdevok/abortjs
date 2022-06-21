@@ -1,4 +1,4 @@
-export const fail = async (fn: () => unknown, err: string) => {
+export const failFn = async (fn: () => unknown, err: string) => {
 	try {
 		await fn();
 	} catch(error) {

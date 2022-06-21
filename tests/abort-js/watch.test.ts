@@ -2,7 +2,7 @@ import AbortJS, { AbortCallback } from '../../src/index';
 import { bulbasaur } from '../api';
 import axios from 'axios';
 import { errors } from '../../src/errors/errors';
-import { fail } from '../utils/fail';
+import { failFn } from '../utils/fail';
 
 type Bulbasaur = {
 	id: number;
@@ -12,7 +12,7 @@ type Bulbasaur = {
 
 const getBulbasaur = async (signal: AbortSignal) => (await axios.get<Bulbasaur>(bulbasaur, { signal })).data;
 
-describe('Tests for watch() method', () => {
+describe('Tests for AbortJS.watch() method', () => {
 
 	it('Calling this method with a pokemon api call must return pokemon data', async () => {
 		const result = await AbortJS.watch<Bulbasaur>('get-bulbasaur', async (signal) => getBulbasaur(signal));
@@ -46,14 +46,14 @@ describe('Tests for watch() method', () => {
 	
 		await Promise.all([
 			// Passing wrong argument types to 1st arg.
-			fail(() => AbortJS.watch(number as string, async () => true), errors.NOT_STRING(number)),
-			fail(() => AbortJS.watch(boolean as string, async () => true), errors.NOT_STRING(boolean)),
-			fail(() => AbortJS.watch(array as string, async () => true), errors.NOT_STRING(array)),
-			fail(() => AbortJS.watch(fn as string, async () => true), errors.NOT_STRING(fn)),
+			failFn(() => AbortJS.watch(number as string, async () => true), errors.NOT_STRING(number)),
+			failFn(() => AbortJS.watch(boolean as string, async () => true), errors.NOT_STRING(boolean)),
+			failFn(() => AbortJS.watch(array as string, async () => true), errors.NOT_STRING(array)),
+			failFn(() => AbortJS.watch(fn as string, async () => true), errors.NOT_STRING(fn)),
 			// Testing 2nd arg.
-			fail(() => AbortJS.watch('x', number as AbortCallback), errors.NOT_FN(number)),
-			fail(() => AbortJS.watch('x', boolean as AbortCallback), errors.NOT_FN(boolean)),
-			fail(() => AbortJS.watch('x', object as AbortCallback), errors.NOT_FN(object)),
+			failFn(() => AbortJS.watch('x', number as AbortCallback), errors.NOT_FN(number)),
+			failFn(() => AbortJS.watch('x', boolean as AbortCallback), errors.NOT_FN(boolean)),
+			failFn(() => AbortJS.watch('x', object as AbortCallback), errors.NOT_FN(object)),
 		]);
 	});
 
