@@ -16,7 +16,7 @@ export class AbortJS {
 			throw new Error(errors.NOT_FN(callback));
 		}
 
-		this.abort(name);
+		this.remove(name, true);
 		this.create(name);
 		return await callback(this.get(name).signal) as T;
 	}
@@ -25,7 +25,7 @@ export class AbortJS {
 		if (!isString(name)) {
 			throw new Error(errors.NOT_STRING(name));
 		}
-		
+
 		if (this.controllers[name]) {
 			this.controllers[name].abort();
 		}
