@@ -22,18 +22,16 @@ describe('Tests for AbortJS.clean() method.', () => {
 		});
 	});
 
-	it('Calling with wrong arguments must throw errors', async () => {
+	it('Calling with wrong arguments must throw errors', () => {
 		const number: unknown = 1;
 		const array: unknown = [];
 		const object: unknown = {};
 
 		expect.assertions(3);
 
-		await Promise.all([
-			failFn(() => AbortJS.clean(number as boolean), errors.NOT_BOOLEAN(number, true)),
-			failFn(() => AbortJS.clean(array as boolean), errors.NOT_BOOLEAN(array, true)),
-			failFn(() => AbortJS.clean(object as boolean), errors.NOT_BOOLEAN(object, true)),
-		]);
+		failFn(() => AbortJS.clean(number as boolean), errors.NOT_BOOLEAN(number, true));
+		failFn(() => AbortJS.clean(array as boolean), errors.NOT_BOOLEAN(array, true));
+		failFn(() => AbortJS.clean(object as boolean), errors.NOT_BOOLEAN(object, true));
 	});
 
 });

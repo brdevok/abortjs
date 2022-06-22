@@ -17,18 +17,16 @@ describe('Tests for AbortJS.create() method.', () => {
 		expect(myController).toHaveProperty('abort');
 	});
 
-	it('Calling with wrong arguments must throw errors', async () => {
+	it('Calling with wrong arguments must throw errors', () => {
 		const number: unknown = 1;
 		const array: unknown = [];
 		const object: unknown = {};
 
 		expect.assertions(3);
 
-		await Promise.all([
-			failFn(() => AbortJS.create(number as string), errors.NOT_STRING(number)),
-			failFn(() => AbortJS.create(array as string), errors.NOT_STRING(array)),
-			failFn(() => AbortJS.create(object as string), errors.NOT_STRING(object)),
-		]);
+		failFn(() => AbortJS.create(number as string), errors.NOT_STRING(number));
+		failFn(() => AbortJS.create(array as string), errors.NOT_STRING(array));
+		failFn(() => AbortJS.create(object as string), errors.NOT_STRING(object));
 	});
 
 });

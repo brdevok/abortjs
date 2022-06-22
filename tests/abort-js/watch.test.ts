@@ -61,7 +61,7 @@ describe('Tests for AbortJS.watch() method', () => {
 		expect(await result4).toEqual(expect.objectContaining({ status: 200 }));
 	});
 
-	it('Calling with wrong argument types must throw errors', async () => {
+	it('Calling with wrong argument types must throw errors', () => {
 		expect.assertions(7);
 
 		const number: unknown = 1;
@@ -70,17 +70,15 @@ describe('Tests for AbortJS.watch() method', () => {
 		const array: unknown = [];
 		const object: unknown = {};
 	
-		await Promise.all([
-			// Passing wrong argument types to 1st arg.
-			failFn(() => AbortJS.watch(number as string, async () => true), errors.NOT_STRING(number)),
-			failFn(() => AbortJS.watch(boolean as string, async () => true), errors.NOT_STRING(boolean)),
-			failFn(() => AbortJS.watch(array as string, async () => true), errors.NOT_STRING(array)),
-			failFn(() => AbortJS.watch(fn as string, async () => true), errors.NOT_STRING(fn)),
-			// Testing 2nd arg.
-			failFn(() => AbortJS.watch('x', number as AbortCallback), errors.NOT_FN(number)),
-			failFn(() => AbortJS.watch('x', boolean as AbortCallback), errors.NOT_FN(boolean)),
-			failFn(() => AbortJS.watch('x', object as AbortCallback), errors.NOT_FN(object)),
-		]);
+		// Passing wrong argument types to 1st arg.
+		failFn(() => AbortJS.watch(number as string, async () => true), errors.NOT_STRING(number));
+		failFn(() => AbortJS.watch(boolean as string, async () => true), errors.NOT_STRING(boolean));
+		failFn(() => AbortJS.watch(array as string, async () => true), errors.NOT_STRING(array));
+		failFn(() => AbortJS.watch(fn as string, async () => true), errors.NOT_STRING(fn));
+		// Testing 2nd arg.
+		failFn(() => AbortJS.watch('x', number as AbortCallback), errors.NOT_FN(number));
+		failFn(() => AbortJS.watch('x', boolean as AbortCallback), errors.NOT_FN(boolean));
+		failFn(() => AbortJS.watch('x', object as AbortCallback), errors.NOT_FN(object));
 	});
 
 });
