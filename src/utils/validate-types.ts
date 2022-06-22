@@ -12,6 +12,13 @@ export const isBoolean = (bool: unknown): boolean => {
 	return false;
 };
 
+export const isArray = (array: unknown): boolean => {
+	if (Array.isArray(array)) {
+		return true;
+	}
+	return false;
+};
+
 export const isFn = (fn: unknown): boolean => {
 	if (typeof fn === 'function') {
 		return true;
