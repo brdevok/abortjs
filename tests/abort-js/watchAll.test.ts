@@ -65,6 +65,8 @@ describe('Tests for AbortJS.watchAll() method', () => {
 		const array6: Array<unknown> = [ [ string, boolean ] ];
 		const array7: Array<unknown> = [ [ string, object ] ];
 
+		expect.assertions(11);
+
 		failFn(() => AbortJS.watchAll(string as AbortCollection), errors.NOT_ARRAY(string));
 		failFn(() => AbortJS.watchAll(number as AbortCollection), errors.NOT_ARRAY(number));
 		failFn(() => AbortJS.watchAll(boolean as AbortCollection), errors.NOT_ARRAY(boolean));
