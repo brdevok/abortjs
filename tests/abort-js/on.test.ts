@@ -1,6 +1,6 @@
 import AbortJS from '../../src';
-import { AbortJSEvents } from '../../src/abort-js-events/abort-js-events';
-import { EventCallback, EventData, Events } from '../../src/abort-js-events/abort-js-events.types';
+import { Events } from '../../src/core/events';
+import { EventCallback, EventData, EventsStack } from '../../src/core/events.types';
 import { errors } from '../../src/errors/errors';
 import { failFn } from '../utils/fail';
 
@@ -17,8 +17,8 @@ describe('Tests for AbortJS.on() method.', () => {
 			controller: name,
 		};
 
-		const addEventToSpy = jest.spyOn(AbortJSEvents, 'addEventTo');
-		const emitSpy = jest.spyOn(AbortJSEvents, 'emit');
+		const addEventToSpy = jest.spyOn(Events, 'addEventTo');
+		const emitSpy = jest.spyOn(Events, 'emit');
 
 		AbortJS.on('create', (e) => create = e);
 		AbortJS.on('remove', (e) => remove = e);
@@ -43,9 +43,9 @@ describe('Tests for AbortJS.on() method.', () => {
 
 		expect.assertions(6);
 
-		failFn(() => AbortJS.on(number as keyof Events, () => true), errors.NOT_STRING(number));
-		failFn(() => AbortJS.on(array as keyof Events, () => true), errors.NOT_STRING(array));
-		failFn(() => AbortJS.on(object as keyof Events, () => true), errors.NOT_STRING(object));
+		failFn(() => AbortJS.on(number as keyof EventsStack, () => true), errors.NOT_STRING(number));
+		failFn(() => AbortJS.on(array as keyof EventsStack, () => true), errors.NOT_STRING(array));
+		failFn(() => AbortJS.on(object as keyof EventsStack, () => true), errors.NOT_STRING(object));
 		failFn(() => AbortJS.on('create', number as EventCallback), errors.NOT_FN(number));
 		failFn(() => AbortJS.on('abort', array as EventCallback), errors.NOT_FN(array));
 		failFn(() => AbortJS.on('remove', object as EventCallback), errors.NOT_FN(object));

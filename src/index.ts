@@ -1,5 +1,5 @@
-import { AbortJS } from './abort-js/abort-js';
+import { AbortJS } from './core/abort-js';
 
-export * from './abort-js/abort-js.types';
+export * from './core/abort-js.types';
 
 export default AbortJS;

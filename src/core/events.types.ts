@@ -4,7 +4,7 @@ export interface EventData {
 
 export type EventCallback = (data: EventData) => void;
 
-export interface Events {
+export interface EventsStack {
 	create: Array<EventCallback>;
 	remove: Array<EventCallback>;
 	abort: Array<EventCallback>;

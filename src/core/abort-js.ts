@@ -1,5 +1,5 @@
-import { AbortJSEvents } from '../abort-js-events/abort-js-events';
-import { EventCallback, Events } from '../abort-js-events/abort-js-events.types';
+import { Events } from './events';
+import { EventCallback, EventsStack } from './events.types';
 import { errors } from '../errors/errors';
 import { lengthOf } from '../utils/arrays';
 import { isArray, isBoolean, isDefined, isFn, isString } from '../utils/validate-types';
@@ -66,7 +66,7 @@ export class AbortJS {
 
 		if (this.controllers[name]) {
 			this.controllers[name].abort();
-			AbortJSEvents.emit('abort', { controller: name });
+			Events.emit('abort', { controller: name });
 		}
 	}
 
@@ -84,7 +84,7 @@ export class AbortJS {
 		}
 
 		this.controllers[name] = new AbortController();
-		AbortJSEvents.emit('create', { controller: name });
+		Events.emit('create', { controller: name });
 	}
 
 	public static clean(abort?: boolean): void {
@@ -108,14 +108,14 @@ export class AbortJS {
 		if (this.controllers[name]) {
 			if (abort) {
 				this.controllers[name].abort();
-				AbortJSEvents.emit('abort', { controller: name });
+				Events.emit('abort', { controller: name });
 			}
 			delete this.controllers[name];
-			AbortJSEvents.emit('remove', { controller: name });
+			Events.emit('remove', { controller: name });
 		}
 	}
 
-	public static on(event: keyof Events, callback: EventCallback): void {
+	public static on(event: keyof EventsStack, callback: EventCallback): void {
 		if (!isString(event)) {
 			throw new Error(errors.NOT_STRING(event));
 		}
@@ -123,6 +123,6 @@ export class AbortJS {
 			throw new Error(errors.NOT_FN(callback));
 		}
 
-		AbortJSEvents.addEventTo(event, callback);
+		Events.addEventTo(event, callback);
 	}
 }
