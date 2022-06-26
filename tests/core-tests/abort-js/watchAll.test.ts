@@ -1,9 +1,9 @@
-import AbortJS, { AbortCollection } from '../../src/index';
-import { pikachu, caterpie } from '../api';
+import AbortJS, { AbortCollection } from '../../../src/index';
+import { pikachu, caterpie } from '../../api';
 import axios from 'axios';
-import { errors } from '../../src/errors/errors';
-import { failFn } from '../utils/fail';
-import { Pokemon } from '../types';
+import { errors } from '../../../src/errors/errors';
+import { failFn } from '../../utils/fail';
+import { Pokemon } from '../../types';
 
 const getPikachu = async (signal: AbortSignal) => (await axios.get<Pokemon>(pikachu, { signal })).data;
 const getCaterpie = async (signal: AbortSignal) => (await axios.get<Pokemon>(caterpie, { signal })).data;

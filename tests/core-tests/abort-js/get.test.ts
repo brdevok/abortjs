@@ -1,6 +1,6 @@
-import AbortJS from '../../src';
-import { errors } from '../../src/errors/errors';
-import { failFn } from '../utils/fail';
+import AbortJS from '../../../src';
+import { errors } from '../../../src/errors/errors';
+import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.get() method.', () => {
 

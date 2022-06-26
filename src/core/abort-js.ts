@@ -125,4 +125,15 @@ export class AbortJS {
 
 		Events.add(event, callback);
 	}
+
+	public static removeEvent(event: keyof EventsStack, callback: EventCallback): void {
+		if (!isString(event)) {
+			throw new Error(errors.NOT_STRING(event));
+		}
+		if (!isFn(callback)) {
+			throw new Error(errors.NOT_FN(callback));
+		}
+
+		Events.remove(event, callback);
+	}
 }

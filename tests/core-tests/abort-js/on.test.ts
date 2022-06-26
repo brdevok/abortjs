@@ -1,8 +1,8 @@
-import AbortJS from '../../src';
-import { Events } from '../../src/core/events';
-import { EventCallback, EventData, EventsStack } from '../../src/core/events.types';
-import { errors } from '../../src/errors/errors';
-import { failFn } from '../utils/fail';
+import AbortJS from '../../../src';
+import { Events } from '../../../src/core/events';
+import { EventCallback, EventData, EventsStack } from '../../../src/core/events.types';
+import { errors } from '../../../src/errors/errors';
+import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.on() method.', () => {
 

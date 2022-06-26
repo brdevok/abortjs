@@ -19,4 +19,14 @@ export class Events {
 		}
 	}
 
+	public static remove(event: keyof EventsStack, callback: EventCallback): void {
+		if (this.events[event]) {
+			const index = this.events[event].indexOf(callback);
+			
+			if (index > -1) {
+				this.events[event].splice(index, 1);
+			}
+		}
+	}
+
 }

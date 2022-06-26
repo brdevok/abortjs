@@ -1,8 +1,8 @@
-import AbortJS, { AbortCallback } from '../../src/index';
-import { bulbasaur, pokemon } from '../api';
+import AbortJS, { AbortCallback } from '../../../src/index';
+import { bulbasaur, pokemon } from '../../api';
 import axios, { AxiosResponse } from 'axios';
-import { errors } from '../../src/errors/errors';
-import { failFn } from '../utils/fail';
+import { errors } from '../../../src/errors/errors';
+import { failFn } from '../../utils/fail';
 
 type Bulbasaur = {
 	id: number;
