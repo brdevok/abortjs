@@ -123,6 +123,6 @@ export class AbortJS {
 			throw new Error(errors.NOT_FN(callback));
 		}
 
-		Events.addEventTo(event, callback);
+		Events.add(event, callback);
 	}
 }

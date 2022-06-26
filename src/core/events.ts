@@ -7,7 +7,7 @@ export class Events {
 		abort: [],
 	};
 
-	public static addEventTo(event: keyof EventsStack, callback: EventCallback): void {
+	public static add(event: keyof EventsStack, callback: EventCallback): void {
 		if (this.events[event]) {
 			this.events[event].push(callback);
 		}

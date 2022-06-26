@@ -17,7 +17,7 @@ describe('Tests for AbortJS.on() method.', () => {
 			controller: name,
 		};
 
-		const addEventToSpy = jest.spyOn(Events, 'addEventTo');
+		const addEventToSpy = jest.spyOn(Events, 'add');
 		const emitSpy = jest.spyOn(Events, 'emit');
 
 		AbortJS.on('create', (e) => create = e);
