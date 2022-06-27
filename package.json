@@ -1,8 +1,6 @@
 {
-  "name": "abort",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "abortjs",
+  "version": "0.0.1-beta",
   "scripts": {
     "test": "npx jest --watchAll",
     "dev": "npx tsc -w",
@@ -12,10 +10,21 @@
     "prettify": "npx prettier --write src",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  },  
+  "main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"exports": {
+		".": {
+			"require": "./dist/cjs/index.js",
+			"import": "./dist/esm/index.js"
+		}
+	},  
+	"author": "brdevok",
+	"description": "Small implementation of AbortController API for easy management of requests cancelation.",
+  "license": "MIT",
+  "keywords": [
+		"abort", "fetch", "browser", "signal"
+	],
   "devDependencies": {
     "@types/jest": "^28.1.2",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
