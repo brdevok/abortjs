@@ -37,10 +37,13 @@ export class Events {
 		}
 		compareObject(data, eventDataShape);
 
-		this.events[event].forEach(callback => callback(data));
+		this.events[event].forEach((callback) => callback(data));
 	}
 
-	public static remove(event: keyof EventsStack, callback: EventCallback): void {
+	public static remove(
+		event: keyof EventsStack,
+		callback: EventCallback,
+	): void {
 		if (!isString(event)) {
 			throw new Error(errors.NOT_STRING(event));
 		}
@@ -52,10 +55,9 @@ export class Events {
 		}
 
 		const index = this.events[event].indexOf(callback);
-		
+
 		if (index > -1) {
 			this.events[event].splice(index, 1);
 		}
 	}
-
 }

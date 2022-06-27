@@ -3,13 +3,18 @@ import { EventCallback, EventsStack } from './events.types';
 import { errors } from '../errors/errors';
 import { lengthOf } from '../utils/arrays';
 import { isArray, isBoolean, isDefined, isFn, isString } from '../utils/types';
-import { Controllers, AbortCallback, AbortCollection, AbortCollectionResults } from './abort-js.types';
+import {
+	Controllers,
+	AbortCallback,
+	AbortCollection,
+	AbortCollectionResults,
+} from './abort-js.types';
 
 export class AbortJS {
 	private static controllers: Controllers = {};
 
 	public static async watch<T = unknown>(
-		name: string, 
+		name: string,
 		callback: AbortCallback,
 	): Promise<T> {
 		if (!isString(name)) {
@@ -21,7 +26,7 @@ export class AbortJS {
 
 		this.remove(name, true);
 		this.create(name);
-		return await callback(this.get(name).signal) as T;
+		return (await callback(this.get(name).signal)) as T;
 	}
 
 	public static watchAll(collection: AbortCollection): AbortCollectionResults {
@@ -37,7 +42,7 @@ export class AbortJS {
 				throw new Error(errors.WRONG_LENGTH(collection, 2));
 			}
 
-			const [ name, callback ] = chunk;
+			const [name, callback] = chunk;
 
 			if (!isString(name)) {
 				throw new Error(errors.NOT_STRING(name));
@@ -126,7 +131,10 @@ export class AbortJS {
 		Events.add(event, callback);
 	}
 
-	public static removeEvent(event: keyof EventsStack, callback: EventCallback): void {
+	public static removeEvent(
+		event: keyof EventsStack,
+		callback: EventCallback,
+	): void {
 		if (!isString(event)) {
 			throw new Error(errors.NOT_STRING(event));
 		}

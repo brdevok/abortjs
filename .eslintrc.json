@@ -36,9 +36,10 @@
 			"comma-dangle": ["error", {
 				"objects": "always-multiline",
 				"arrays": "always-multiline",
-				"functions": "always-multiline"
+				"functions": "always-multiline",
+				"imports": "always-multiline"
 			}],
-			"array-bracket-spacing": ["error", "always"],
+			"array-bracket-spacing": "error",
 			"object-curly-spacing": ["error", "always"],
 			"semi":	["error", "always"],
 			"quotes": ["error", "single"],

@@ -9,4 +9,3 @@ export interface EventsStack {
 	remove: Array<EventCallback>;
 	abort: Array<EventCallback>;
 }
-

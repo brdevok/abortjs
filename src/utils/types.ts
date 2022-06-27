@@ -38,7 +38,7 @@ export const isFn: TypeCheckFn = (fn) => {
 export const isDefined: TypeCheckFn = (value) => {
 	if (value !== undefined) {
 		return true;
-	} 
+	}
 	return false;
 };
 
@@ -51,9 +51,11 @@ export type TypeCheckObjectShape = Record<any, TypeCheckObj>;
 
 export const types: Record<string, () => TypeCheckObj> = {
 	string(): TypeCheckObj {
-		return { 
-			val(v) { return isString(v); },
-			expected: 'string', 
+		return {
+			val(v) {
+				return isString(v);
+			},
+			expected: 'string',
 		};
 	},
 	// Upgrade when needed
