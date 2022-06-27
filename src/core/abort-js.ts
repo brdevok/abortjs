@@ -2,7 +2,7 @@ import { Events } from './events';
 import { EventCallback, EventsStack } from './events.types';
 import { errors } from '../errors/errors';
 import { lengthOf } from '../utils/arrays';
-import { isArray, isBoolean, isDefined, isFn, isString } from '../utils/validate-types';
+import { isArray, isBoolean, isDefined, isFn, isString } from '../utils/types';
 import { Controllers, AbortCallback, AbortCollection, AbortCollectionResults } from './abort-js.types';
 
 export class AbortJS {
