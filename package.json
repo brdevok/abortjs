@@ -9,23 +9,30 @@
     "build:esm": "npx tsc --module es2015 --outDir dist/esm",
     "prettify": "npx prettier --write src, tests",
     "lint": "npx eslint src",
-    "lint:fix": "npx eslint src --fix"
-  },  
+    "lint:fix": "npx eslint src --fix",
+    "publish": " git add . && git commit -m 'Publish package' && git push && npm run build && npm publish",
+    "v:patch": "npm version patch",
+    "v:minor": "npm version minor",
+    "v:major": "npm version mayor"
+  },
   "main": "dist/cjs/index.js",
-	"module": "dist/esm/index.js",
-	"types": "dist/types/index.d.ts",
-	"exports": {
-		".": {
-			"require": "./dist/cjs/index.js",
-			"import": "./dist/esm/index.js"
-		}
-	},  
-	"author": "brdevok",
-	"description": "Small implementation of AbortController API for easy management of requests cancelation.",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "author": "brdevok",
+  "description": "Small implementation of AbortController API for easy management of requests cancelation.",
   "license": "MIT",
   "keywords": [
-		"abort", "fetch", "browser", "signal"
-	],
+    "abort",
+    "fetch",
+    "browser",
+    "signal"
+  ],
   "devDependencies": {
     "@types/jest": "^28.1.2",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
