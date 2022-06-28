@@ -2,7 +2,18 @@
 
 Small implementation of AbortController API for easy management of requests cancelation in modern browsers, fully typed in Typescript.
 
-## Quick start with `watch()` method
+ * [What it does](#what-it-does)
+ * [Quick start](#quick-start)
+ * [Aborting multiple requests](#aborting-multiple-requests)
+ * [Events](#events)
+ * [Current event names](#current-event-names)
+ * [Complete API](#complete-api)
+
+## What it does?
+
+AbortJs was created to facilitate the use of abort controllers in your code, it provides to the user a set of tools with a clean interface to easily manage the cancelation of requests withot relying in additional lines of code but with quick integration.
+
+## Quick start
 
 Import the package where you need it.
 
@@ -16,19 +27,19 @@ or
 import Abort from 'abortjs';
 ```
 
-Then make use of the `watch()` method for automatic cancelation of the request on re-calls.
+Then you can make use of the `watch()` method to start working with requests and abort controllers at once.
 
-The `watch` method requires a unique string name and a callback containing your fetch, the string will be used to as an identifier of the `AbortController` created for the callback, you can access the `signal` of that controller from the callback parameter.
-
-If you repeat the controller name in another part of your code, you may be leading to unwanted cancelations.
+The `watch` method requires two arguments, the first is a string that will be used as an identifier and give a name to the controller that is going to be created, the second is a callback containing the signal of the created controller as an argument.
+You can write your requests inside of the callback and pass the signal, then every time your code repeats the sequence, the controller related to that signal will be aborted before running the callback again.
 
 ```javascript
 Abort.watch('my-controller', (signal) => fetch('...', { signal: signal }));
 ```
 
-You can store the value of your fetch returning it from the callback.
+If needed, you can store the value of your fetchs returning it from the callback or using promises.
 
 ```javascript
+// Using promises
 const response = new Promise((resolve, reject) => {
 	Abort.watch('my-controller', (signal) => {
 		fetch('...', { signal})
@@ -41,39 +52,49 @@ const response = new Promise((resolve, reject) => {
 or using `async await`
 
 ```javascript
+// Using async await)
 const response = await Abort.watch('my-controller', async (signal) => await fetch('...', { signal }));
 ```
 
-Now you fetchs will be aborted automatically every time your code repeats the sequence.
+Note that if you repeat the name of the controller (`'my-controller'` in this case), it may cause unwanted aborts in your code, make sure you are using unique strings values for every watch, unless you want to override the callback.
 
-## The `watchAll()` method
+## Aborting multiple requests
 
-If you want to make several requests and have control of all them, you can make use of the `watchAll()` method.
-It accepts an array of 2 items arrays, the first item is a controller unique name, and the second is a callback.
+If you want to make several requests and have control of all of them, you can make use of the `watchAll()` method.
+It accepts an array of two items arrays, these two items works exactly like the `watch()` method parameters just above, the first is a string with the controller name and the second a callback with the signal.
 
 ```javascript
 const responses = await Abort.watchAll([
-	['controller-1', (signal) => fetch('...', { signal })],
-	['controller-2', (signal) => fetch('...', { signal })],
-	['controller-3', (signal) => fetch('...', { signal })],
-	['controller-4', (signal) => fetch('...', { signal })],
+	['controller1', (signal) => fetch('...', { signal })],
+	['controller2', (signal) => fetch('...', { signal })],
+	['controller3', (signal) => fetch('...', { signal })],
+	['controller4', (signal) => fetch('...', { signal })],
 ]);
 ```
 
-The return is an object containing the results of each callback labeled by it's controller name.
+All callbacks will be executed in the same order they are placed.
+An object with the controller names will be returned, each name is a key and it's value corresponds to the result of the callback.
 
 ```javascript
-await responses['controller-1'] // results of ['controller-1', (signal) => fetch('...', { signal })]
-await responses['controller-2'] // results of ['controller-2', (signal) => fetch('...', { signal })]
-await responses['controller-3'] // results of ['controller-3', (signal) => fetch('...', { signal })]
-await responses['controller-4'] // results of ['controller-4', (signal) => fetch('...', { signal })]
+await responses.controller1 // results of ['controller-1', (signal) => fetch('...', { signal })]
+await responses.controller2 // results of ['controller-2', (signal) => fetch('...', { signal })]
+await responses.controller3 // results of ['controller-3', (signal) => fetch('...', { signal })]
+await responses.controller4 // results of ['controller-4', (signal) => fetch('...', { signal })]
 ```
 
 ## Events
 
-AbortJs has events that fires every time something related to a controller happens, [see how manage them](#on(event, callback)).
+AbortJs is equiped with a set of events that fires every time something related to a controller happens, to access these events you can make use of the `on()` method.
 
-Current event names:
+The `on(event, callback)` receives two arguments, the first is the event name that want to be listened, the second is a callback that will be executed when the event fires. Also the callback provides an object containing data of the controller that fired the event.
+
+```javascript
+Abort.on('create', (e) => console.log(e.controller));
+```
+
+Now every time a controller is created (i.e. calling `watch`, `watchAll`, or `create`), it will log the name of the controller.
+
+#### Current event names
 
  * `'create'` - Every time a controller is created.
  * `'remove'` - Every time a controller is removed.
