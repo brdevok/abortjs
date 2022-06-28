@@ -5,7 +5,6 @@ import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.removeEvent() method.', () => {
-
 	it('Must remove same event callback added previously.', () => {
 		let n1 = 0;
 		let n2 = 1;
@@ -48,12 +47,29 @@ describe('Tests for AbortJS.removeEvent() method.', () => {
 
 		expect.assertions(6);
 
-		failFn(() => AbortJS.removeEvent(number as keyof EventsStack, () => true), errors.NOT_STRING(number));
-		failFn(() => AbortJS.removeEvent(array as keyof EventsStack, () => true), errors.NOT_STRING(array));
-		failFn(() => AbortJS.removeEvent(object as keyof EventsStack, () => true), errors.NOT_STRING(object));
-		failFn(() => AbortJS.removeEvent('create', number as EventCallback), errors.NOT_FN(number));
-		failFn(() => AbortJS.removeEvent('abort', array as EventCallback), errors.NOT_FN(array));
-		failFn(() => AbortJS.removeEvent('remove', object as EventCallback), errors.NOT_FN(object));
+		failFn(
+			() => AbortJS.removeEvent(number as keyof EventsStack, () => true),
+			errors.NOT_STRING(number),
+		);
+		failFn(
+			() => AbortJS.removeEvent(array as keyof EventsStack, () => true),
+			errors.NOT_STRING(array),
+		);
+		failFn(
+			() => AbortJS.removeEvent(object as keyof EventsStack, () => true),
+			errors.NOT_STRING(object),
+		);
+		failFn(
+			() => AbortJS.removeEvent('create', number as EventCallback),
+			errors.NOT_FN(number),
+		);
+		failFn(
+			() => AbortJS.removeEvent('abort', array as EventCallback),
+			errors.NOT_FN(array),
+		);
+		failFn(
+			() => AbortJS.removeEvent('remove', object as EventCallback),
+			errors.NOT_FN(object),
+		);
 	});
-
 });

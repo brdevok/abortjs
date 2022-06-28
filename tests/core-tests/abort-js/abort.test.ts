@@ -3,12 +3,11 @@ import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.abort() method.', () => {
-
 	it('Calling it must abort a controller.', () => {
 		const controllerName = 'my-controller';
 
 		AbortJS.create(controllerName);
-		
+
 		const myController = AbortJS.get(controllerName);
 		const abortSpy = jest.spyOn(myController, 'abort');
 
@@ -28,5 +27,4 @@ describe('Tests for AbortJS.abort() method.', () => {
 		failFn(() => AbortJS.abort(array as string), errors.NOT_STRING(array));
 		failFn(() => AbortJS.abort(object as string), errors.NOT_STRING(object));
 	});
-
 });

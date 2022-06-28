@@ -3,11 +3,10 @@ import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.clean() method.', () => {
-
 	it('Calling it must remove all controllers in controllers property.', () => {
-		const names = [ 'a', 'b', 'c', 'd' ];
-		
-		names.forEach(name => {
+		const names = ['a', 'b', 'c', 'd'];
+
+		names.forEach((name) => {
 			AbortJS.create(name);
 			const controller = AbortJS.get(name);
 
@@ -15,7 +14,7 @@ describe('Tests for AbortJS.clean() method.', () => {
 		});
 
 		AbortJS.clean();
-		names.forEach(name => {
+		names.forEach((name) => {
 			const controller = AbortJS.get(name);
 
 			expect(controller).toBe(undefined);
@@ -29,9 +28,17 @@ describe('Tests for AbortJS.clean() method.', () => {
 
 		expect.assertions(3);
 
-		failFn(() => AbortJS.clean(number as boolean), errors.NOT_BOOLEAN(number, true));
-		failFn(() => AbortJS.clean(array as boolean), errors.NOT_BOOLEAN(array, true));
-		failFn(() => AbortJS.clean(object as boolean), errors.NOT_BOOLEAN(object, true));
+		failFn(
+			() => AbortJS.clean(number as boolean),
+			errors.NOT_BOOLEAN(number, true),
+		);
+		failFn(
+			() => AbortJS.clean(array as boolean),
+			errors.NOT_BOOLEAN(array, true),
+		);
+		failFn(
+			() => AbortJS.clean(object as boolean),
+			errors.NOT_BOOLEAN(object, true),
+		);
 	});
-
 });

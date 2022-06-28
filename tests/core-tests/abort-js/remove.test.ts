@@ -3,7 +3,6 @@ import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.remove() method.', () => {
-
 	it('Calling it must a specific controller from controllers property.', () => {
 		const controllerName = 'my-controller';
 		let myController = AbortJS.get(controllerName);
@@ -26,7 +25,7 @@ describe('Tests for AbortJS.remove() method.', () => {
 		const controllerName = 'my-controller';
 
 		AbortJS.create(controllerName);
-		
+
 		const myController = AbortJS.get(controllerName);
 		const abortSpy = jest.spyOn(myController, 'abort');
 
@@ -45,9 +44,17 @@ describe('Tests for AbortJS.remove() method.', () => {
 		failFn(() => AbortJS.remove(number as string), errors.NOT_STRING(number));
 		failFn(() => AbortJS.remove(array as string), errors.NOT_STRING(array));
 		failFn(() => AbortJS.remove(object as string), errors.NOT_STRING(object));
-		failFn(() => AbortJS.remove('x', number as boolean), errors.NOT_BOOLEAN(number, true));
-		failFn(() => AbortJS.remove('x', array as boolean), errors.NOT_BOOLEAN(array, true));
-		failFn(() => AbortJS.remove('x', object as boolean), errors.NOT_BOOLEAN(object, true));
+		failFn(
+			() => AbortJS.remove('x', number as boolean),
+			errors.NOT_BOOLEAN(number, true),
+		);
+		failFn(
+			() => AbortJS.remove('x', array as boolean),
+			errors.NOT_BOOLEAN(array, true),
+		);
+		failFn(
+			() => AbortJS.remove('x', object as boolean),
+			errors.NOT_BOOLEAN(object, true),
+		);
 	});
-
 });

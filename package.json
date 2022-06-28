@@ -7,7 +7,7 @@
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "npx tsc --module commonjs --outDir dist/cjs",
     "build:esm": "npx tsc --module es2015 --outDir dist/esm",
-    "prettify": "npx prettier --write src",
+    "prettify": "npx prettier --write src, tests",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix"
   },  

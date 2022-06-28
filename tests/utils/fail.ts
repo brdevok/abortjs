@@ -1,7 +1,7 @@
 export const failFn = async (fn: () => unknown, err: string) => {
 	try {
 		await fn();
-	} catch(error) {
+	} catch (error) {
 		expect(error).toEqual(new Error(err));
-	} 
+	}
 };

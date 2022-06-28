@@ -3,7 +3,6 @@ import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.create() method.', () => {
-
 	it('Calling it must create a new controller and store it in controllers', () => {
 		const controllerName = 'my-controller';
 		let myController = AbortJS.get(controllerName);
@@ -28,5 +27,4 @@ describe('Tests for AbortJS.create() method.', () => {
 		failFn(() => AbortJS.create(array as string), errors.NOT_STRING(array));
 		failFn(() => AbortJS.create(object as string), errors.NOT_STRING(object));
 	});
-
 });
