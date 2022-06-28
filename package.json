@@ -1,6 +1,6 @@
 {
   "name": "abortjs",
-  "version": "0.0.1-beta",
+  "version": "0.0.1",
   "scripts": {
     "test": "cd tests/package-tests && npm i && cd ../.. && npx jest --watchAll",
     "dev": "npx tsc -w",
