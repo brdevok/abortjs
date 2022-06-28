@@ -10,7 +10,7 @@
     "prettify": "npx prettier --write src, tests",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
-    "publish": " git add . && git commit -m 'Publish package' && git push && npm run build && npm publish",
+    "publish": "git add . && git commit -m 'Publish package' && git push && npm run build && npm publish",
     "v:patch": "npm version patch",
     "v:minor": "npm version minor",
     "v:major": "npm version mayor"
