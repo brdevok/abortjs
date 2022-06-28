@@ -10,10 +10,10 @@
     "prettify": "npx prettier --write src, tests",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
-    "publish": "npm run build && npm publish",
-    "v:patch": "npm version patch && git add . && git commit -m 'Increase patch version number'",
-    "v:minor": "npm version minor && git add . && git commit -m 'Increase minor version number'",
-    "v:major": "npm version mayor && git add . && git commit -m 'Increase major version number'"
+    "publish": " git add . && git commit -m 'Publish package' && git push && npm run build && npm publish",
+    "v:patch": "npm version patch",
+    "v:minor": "npm version minor",
+    "v:major": "npm version mayor"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
