@@ -2,7 +2,7 @@
   "name": "abortjs",
   "version": "0.0.1-beta",
   "scripts": {
-    "test": "npx jest --watchAll",
+    "test": "cd tests/package-tests && npm i && cd ../.. && npx jest --watchAll",
     "dev": "npx tsc -w",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "npx tsc --module commonjs --outDir dist/cjs",
