@@ -1,0 +1,10 @@
+src
+tests
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitignore
+.prettierignore
+.prettierrc.json
+.jest.config.js
+tsconfig.json
