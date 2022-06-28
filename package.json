@@ -11,7 +11,6 @@
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
     "publish": "npm run build && npm publish",
-    "v:prepatch": "npm version prepatch && git add . && git commit -m 'Increase prepatch version number'",
     "v:patch": "npm version patch && git add . && git commit -m 'Increase patch version number'",
     "v:minor": "npm version minor && git add . && git commit -m 'Increase minor version number'",
     "v:major": "npm version mayor && git add . && git commit -m 'Increase major version number'"
