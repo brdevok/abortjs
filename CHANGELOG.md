@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create CHANGELOG file.
 - Add repository URL and more author data to package.json.
 
+### Changed
+- Custom error messages functions are now exported individually instead as object methods.
+
 ### Fixed
 - Fixed `npm run publish` command and prevent unnecesary git commits.
 

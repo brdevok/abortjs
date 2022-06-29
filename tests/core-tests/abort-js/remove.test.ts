@@ -1,5 +1,5 @@
 import AbortJS from '../../../src';
-import { errors } from '../../../src/errors/errors';
+import { NOT_BOOLEAN, NOT_STRING } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.remove() method.', () => {
@@ -41,20 +41,20 @@ describe('Tests for AbortJS.remove() method.', () => {
 
 		expect.assertions(6);
 
-		failFn(() => AbortJS.remove(number as string), errors.NOT_STRING(number));
-		failFn(() => AbortJS.remove(array as string), errors.NOT_STRING(array));
-		failFn(() => AbortJS.remove(object as string), errors.NOT_STRING(object));
+		failFn(() => AbortJS.remove(number as string), NOT_STRING(number));
+		failFn(() => AbortJS.remove(array as string), NOT_STRING(array));
+		failFn(() => AbortJS.remove(object as string), NOT_STRING(object));
 		failFn(
 			() => AbortJS.remove('x', number as boolean),
-			errors.NOT_BOOLEAN(number, true),
+			NOT_BOOLEAN(number, true),
 		);
 		failFn(
 			() => AbortJS.remove('x', array as boolean),
-			errors.NOT_BOOLEAN(array, true),
+			NOT_BOOLEAN(array, true),
 		);
 		failFn(
 			() => AbortJS.remove('x', object as boolean),
-			errors.NOT_BOOLEAN(object, true),
+			NOT_BOOLEAN(object, true),
 		);
 	});
 });

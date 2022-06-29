@@ -1,9 +1,14 @@
 import AbortJS, { AbortCollection } from '../../../src/index';
 import { pikachu, caterpie } from '../../api';
 import axios from 'axios';
-import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 import { Pokemon } from '../../types';
+import {
+	NOT_ARRAY,
+	NOT_FN,
+	NOT_STRING,
+	WRONG_LENGTH,
+} from '../../../src/errors/errors';
 
 const getPikachu = async (signal: AbortSignal) =>
 	(await axios.get<Pokemon>(pikachu, { signal })).data;
@@ -52,7 +57,7 @@ describe('Tests for AbortJS.watchAll() method', () => {
 		expect(await results[names[2]]).toEqual(expect.objectContaining(_pikachu));
 	});
 
-	it('Call method with wrong argument types must throw errors.', () => {
+	it('Call method with wrong argument types must throw ', () => {
 		const string: unknown = 'x';
 		const number: unknown = 1;
 		const boolean: unknown = true;
@@ -72,49 +77,43 @@ describe('Tests for AbortJS.watchAll() method', () => {
 
 		failFn(
 			() => AbortJS.watchAll(string as AbortCollection),
-			errors.NOT_ARRAY(string),
+			NOT_ARRAY(string),
 		);
 		failFn(
 			() => AbortJS.watchAll(number as AbortCollection),
-			errors.NOT_ARRAY(number),
+			NOT_ARRAY(number),
 		);
 		failFn(
 			() => AbortJS.watchAll(boolean as AbortCollection),
-			errors.NOT_ARRAY(boolean),
+			NOT_ARRAY(boolean),
 		);
 		failFn(
 			() => AbortJS.watchAll(object as AbortCollection),
-			errors.NOT_ARRAY(object),
+			NOT_ARRAY(object),
 		);
 
 		failFn(
 			() => AbortJS.watchAll(array1 as AbortCollection),
-			errors.WRONG_LENGTH(array1, 2),
+			WRONG_LENGTH(array1, 2),
 		);
 		failFn(
 			() => AbortJS.watchAll(array2 as AbortCollection),
-			errors.WRONG_LENGTH(array2, 2),
+			WRONG_LENGTH(array2, 2),
 		);
 		failFn(
 			() => AbortJS.watchAll(array3 as AbortCollection),
-			errors.WRONG_LENGTH(array3, 2),
+			WRONG_LENGTH(array3, 2),
 		);
 
 		failFn(
 			() => AbortJS.watchAll(array4 as AbortCollection),
-			errors.NOT_STRING(boolean),
+			NOT_STRING(boolean),
 		);
 		failFn(
 			() => AbortJS.watchAll(array5 as AbortCollection),
-			errors.NOT_STRING(number),
+			NOT_STRING(number),
 		);
-		failFn(
-			() => AbortJS.watchAll(array6 as AbortCollection),
-			errors.NOT_FN(boolean),
-		);
-		failFn(
-			() => AbortJS.watchAll(array7 as AbortCollection),
-			errors.NOT_FN(object),
-		);
+		failFn(() => AbortJS.watchAll(array6 as AbortCollection), NOT_FN(boolean));
+		failFn(() => AbortJS.watchAll(array7 as AbortCollection), NOT_FN(object));
 	});
 });
