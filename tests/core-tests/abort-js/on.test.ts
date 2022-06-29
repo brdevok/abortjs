@@ -5,7 +5,7 @@ import {
 	EventData,
 	EventsStack,
 } from '../../../src/core/events.types';
-import { errors } from '../../../src/errors/errors';
+import { NOT_FN, NOT_STRING } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.on() method.', () => {
@@ -48,27 +48,18 @@ describe('Tests for AbortJS.on() method.', () => {
 
 		failFn(
 			() => AbortJS.on(number as keyof EventsStack, () => true),
-			errors.NOT_STRING(number),
+			NOT_STRING(number),
 		);
 		failFn(
 			() => AbortJS.on(array as keyof EventsStack, () => true),
-			errors.NOT_STRING(array),
+			NOT_STRING(array),
 		);
 		failFn(
 			() => AbortJS.on(object as keyof EventsStack, () => true),
-			errors.NOT_STRING(object),
+			NOT_STRING(object),
 		);
-		failFn(
-			() => AbortJS.on('create', number as EventCallback),
-			errors.NOT_FN(number),
-		);
-		failFn(
-			() => AbortJS.on('abort', array as EventCallback),
-			errors.NOT_FN(array),
-		);
-		failFn(
-			() => AbortJS.on('remove', object as EventCallback),
-			errors.NOT_FN(object),
-		);
+		failFn(() => AbortJS.on('create', number as EventCallback), NOT_FN(number));
+		failFn(() => AbortJS.on('abort', array as EventCallback), NOT_FN(array));
+		failFn(() => AbortJS.on('remove', object as EventCallback), NOT_FN(object));
 	});
 });

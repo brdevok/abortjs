@@ -1,5 +1,5 @@
 import AbortJS from '../../../src';
-import { errors } from '../../../src/errors/errors';
+import { NOT_BOOLEAN } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.clean() method.', () => {
@@ -28,17 +28,8 @@ describe('Tests for AbortJS.clean() method.', () => {
 
 		expect.assertions(3);
 
-		failFn(
-			() => AbortJS.clean(number as boolean),
-			errors.NOT_BOOLEAN(number, true),
-		);
-		failFn(
-			() => AbortJS.clean(array as boolean),
-			errors.NOT_BOOLEAN(array, true),
-		);
-		failFn(
-			() => AbortJS.clean(object as boolean),
-			errors.NOT_BOOLEAN(object, true),
-		);
+		failFn(() => AbortJS.clean(number as boolean), NOT_BOOLEAN(number, true));
+		failFn(() => AbortJS.clean(array as boolean), NOT_BOOLEAN(array, true));
+		failFn(() => AbortJS.clean(object as boolean), NOT_BOOLEAN(object, true));
 	});
 });

@@ -1,6 +1,5 @@
 import { Events } from './events';
 import { EventCallback, EventsStack } from './events.types';
-import { errors } from '../errors/errors';
 import { lengthOf } from '../utils/arrays';
 import { isArray, isBoolean, isDefined, isFn, isString } from '../utils/types';
 import {
@@ -9,6 +8,7 @@ import {
 	AbortCollection,
 	AbortCollectionResults,
 } from './abort-js.types';
+import { NOT_ARRAY, NOT_BOOLEAN, NOT_FN, NOT_STRING, WRONG_LENGTH } from '../errors/errors';
 
 export class AbortJS {
 	private static controllers: Controllers = {};
@@ -18,10 +18,10 @@ export class AbortJS {
 		callback: AbortCallback,
 	): Promise<T> {
 		if (!isString(name)) {
-			throw new Error(errors.NOT_STRING(name));
+			throw new Error(NOT_STRING(name));
 		}
 		if (!isFn(callback)) {
-			throw new Error(errors.NOT_FN(callback));
+			throw new Error(NOT_FN(callback));
 		}
 
 		this.remove(name, true);
@@ -31,7 +31,7 @@ export class AbortJS {
 
 	public static watchAll(collection: AbortCollection): AbortCollectionResults {
 		if (!isArray(collection)) {
-			throw new Error(errors.NOT_ARRAY(collection));
+			throw new Error(NOT_ARRAY(collection));
 		}
 
 		const watchHash: Record<string, AbortCallback> = {};
@@ -39,16 +39,16 @@ export class AbortJS {
 
 		collection.forEach((chunk) => {
 			if (!lengthOf(chunk, 2)) {
-				throw new Error(errors.WRONG_LENGTH(collection, 2));
+				throw new Error(WRONG_LENGTH(collection, 2));
 			}
 
 			const [name, callback] = chunk;
 
 			if (!isString(name)) {
-				throw new Error(errors.NOT_STRING(name));
+				throw new Error(NOT_STRING(name));
 			}
 			if (!isFn(callback)) {
-				throw new Error(errors.NOT_FN(callback));
+				throw new Error(NOT_FN(callback));
 			}
 
 			if (watchHash[name]) {
@@ -66,7 +66,7 @@ export class AbortJS {
 
 	public static abort(name: string): void {
 		if (!isString(name)) {
-			throw new Error(errors.NOT_STRING(name));
+			throw new Error(NOT_STRING(name));
 		}
 
 		if (this.controllers[name]) {
@@ -77,7 +77,7 @@ export class AbortJS {
 
 	public static get(name: string): AbortController {
 		if (!isString(name)) {
-			throw new Error(errors.NOT_STRING(name));
+			throw new Error(NOT_STRING(name));
 		}
 
 		return this.controllers[name];
@@ -85,7 +85,7 @@ export class AbortJS {
 
 	public static create(name: string): void {
 		if (!isString(name)) {
-			throw new Error(errors.NOT_STRING(name));
+			throw new Error(NOT_STRING(name));
 		}
 
 		this.controllers[name] = new AbortController();
@@ -94,7 +94,7 @@ export class AbortJS {
 
 	public static clean(abort?: boolean): void {
 		if (isDefined(abort) && !isBoolean(abort)) {
-			throw new Error(errors.NOT_BOOLEAN(abort, true));
+			throw new Error(NOT_BOOLEAN(abort, true));
 		}
 
 		for (const controller in this.controllers) {
@@ -104,10 +104,10 @@ export class AbortJS {
 
 	public static remove(name: string, abort?: boolean): void {
 		if (!isString(name)) {
-			throw new Error(errors.NOT_STRING(name));
+			throw new Error(NOT_STRING(name));
 		}
 		if (isDefined(abort) && !isBoolean(abort)) {
-			throw new Error(errors.NOT_BOOLEAN(abort, true));
+			throw new Error(NOT_BOOLEAN(abort, true));
 		}
 
 		if (this.controllers[name]) {
@@ -122,10 +122,10 @@ export class AbortJS {
 
 	public static on(event: keyof EventsStack, callback: EventCallback): void {
 		if (!isString(event)) {
-			throw new Error(errors.NOT_STRING(event));
+			throw new Error(NOT_STRING(event));
 		}
 		if (!isFn(callback)) {
-			throw new Error(errors.NOT_FN(callback));
+			throw new Error(NOT_FN(callback));
 		}
 
 		Events.add(event, callback);
@@ -136,10 +136,10 @@ export class AbortJS {
 		callback: EventCallback,
 	): void {
 		if (!isString(event)) {
-			throw new Error(errors.NOT_STRING(event));
+			throw new Error(NOT_STRING(event));
 		}
 		if (!isFn(callback)) {
-			throw new Error(errors.NOT_FN(callback));
+			throw new Error(NOT_FN(callback));
 		}
 
 		Events.remove(event, callback);

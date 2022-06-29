@@ -1,4 +1,4 @@
-import { errors } from '../errors/errors';
+import { NOT_FN, NOT_OBJECT, NOT_STRING, WRONG_EVENT } from '../errors/errors';
 import { compareObject } from '../utils/objects';
 import { isFn, isObject, isString } from '../utils/types';
 import { eventDataShape } from './events.constants';
@@ -13,13 +13,13 @@ export class Events {
 
 	public static add(event: keyof EventsStack, callback: EventCallback): void {
 		if (!isString(event)) {
-			throw new Error(errors.NOT_STRING(event));
+			throw new Error(NOT_STRING(event));
 		}
 		if (!isFn(callback)) {
-			throw new Error(errors.NOT_FN(callback));
+			throw new Error(NOT_FN(callback));
 		}
 		if (!this.events[event]) {
-			throw new Error(errors.WRONG_EVENT(event));
+			throw new Error(WRONG_EVENT(event));
 		}
 
 		this.events[event].push(callback);
@@ -27,13 +27,13 @@ export class Events {
 
 	public static emit(event: keyof EventsStack, data: EventData): void {
 		if (!isString(event)) {
-			throw new Error(errors.NOT_STRING(event));
+			throw new Error(NOT_STRING(event));
 		}
 		if (!isObject(data)) {
-			throw new Error(errors.NOT_OBJECT(data));
+			throw new Error(NOT_OBJECT(data));
 		}
 		if (!this.events[event]) {
-			throw new Error(errors.WRONG_EVENT(event));
+			throw new Error(WRONG_EVENT(event));
 		}
 		compareObject(data, eventDataShape);
 
@@ -45,13 +45,13 @@ export class Events {
 		callback: EventCallback,
 	): void {
 		if (!isString(event)) {
-			throw new Error(errors.NOT_STRING(event));
+			throw new Error(NOT_STRING(event));
 		}
 		if (!isFn(callback)) {
-			throw new Error(errors.NOT_FN(callback));
+			throw new Error(NOT_FN(callback));
 		}
 		if (!this.events[event]) {
-			throw new Error(errors.WRONG_EVENT(event));
+			throw new Error(WRONG_EVENT(event));
 		}
 
 		const index = this.events[event].indexOf(callback);
