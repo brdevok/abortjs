@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Create CHANGELOG file.
-- Add project github link to README file.
+- Add repository URL and more author data to package.json.
 
 ### Fixed
 - Fixed `npm run publish` command and prevent unnecesary git commits.

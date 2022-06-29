@@ -24,7 +24,11 @@
       "import": "./dist/esm/index.js"
     }
   },
-  "author": "brdevok",
+  "author": "brdevok <braianrosas1998@outlook.com> https://github.com/brdevok",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/brdevok/abortjs"
+	},
   "description": "Small implementation of AbortController API for easy management of requests cancelation.",
   "license": "MIT",
   "keywords": [
