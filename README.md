@@ -8,6 +8,7 @@ Small implementation of AbortController API for easy management of requests canc
  * [Events](#events)
  * [Current event names](#current-event-names)
  * [Complete API](#complete-api)
+ * [Links](#links)
 
 ## What it does?
 
@@ -160,4 +161,8 @@ Add an event handler for the defined event name. When fired, the callback will c
  * `callback: (event: { controller: string }) => void` = Function to be removed.
 
 Remove the event handler from the event scope defined in the name.
+
+#### Links
+
+- [Github](https://github.com/brdevok/abortjs)
 
