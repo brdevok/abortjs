@@ -1,6 +1,6 @@
 {
   "name": "abortjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "test": "cd tests/package-tests && npm i && cd ../.. && npx jest --watchAll",
     "dev": "npx tsc -w",
@@ -36,10 +36,10 @@
     "fetch",
     "browser",
     "signal",
-		"abortcontroller",
-		"request",
-		"promise",
-		"whatwg"
+    "abortcontroller",
+    "request",
+    "promise",
+    "whatwg"
   ],
   "devDependencies": {
     "@types/jest": "^28.1.2",
