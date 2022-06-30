@@ -1,6 +1,6 @@
 # AbortJs :scissors:
 
-Small implementation of AbortController API for easy management of requests cancelation in modern browsers, fully typed in Typescript.
+Small implementation of AbortController API for easy management of requests cancelation, fully typed in Typescript.
 
  * [What it does](#what-it-does)
  * [Quick start](#quick-start)
@@ -11,7 +11,7 @@ Small implementation of AbortController API for easy management of requests canc
 
 ## What it does?
 
-AbortJs was created to facilitate the use of abort controllers in your code, it provides to the user a set of tools with a clean interface to easily manage the cancelation of requests withot relying in additional lines of code but with quick integration.
+AbortJs was created to facilitate the use of abort controllers in your code, it provides to the user a set of tools with a clean interface to easily manage the cancelation of requests without relying in additional lines of code but with quick integration.
 
 ## Quick start
 
@@ -149,7 +149,7 @@ Remove all controllers, if `abort` is `true` then all controllers will be aborte
 #### `on(event, callback)`
 
  * `event: string` - Name of the event.
- * `callback: (event: { controller: string }) => void` = Callback to run when event fires.
+ * `callback: (event: { controller: string }) => void` - Callback to run when event fires.
 
 Add an event handler for the defined event name. When fired, the callback will contain an object with the controller name that fired it.
 
@@ -157,8 +157,8 @@ Add an event handler for the defined event name. When fired, the callback will c
 #### `removeEvent(event, callback)`
 
  * `event: string` - Name of the event.
- * `callback: (event: { controller: string }) => void` = Function to be removed.
+ * `callback: (event: { controller: string }) => void` - Function to be removed.
 
-Remove the event handler from the event scope defined in the name.
+Remove the event handler from the event scope defined by name.
 
 

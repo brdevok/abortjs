@@ -9,6 +9,7 @@ import {
 	AbortCollectionResults,
 } from './abort-js.types';
 import { NOT_ARRAY, NOT_BOOLEAN, NOT_FN, NOT_STRING, WRONG_LENGTH } from '../errors/errors';
+import _abortPolyfill from 'abort-controller';
 
 export class AbortJS {
 	private static controllers: Controllers = {};
@@ -88,7 +89,11 @@ export class AbortJS {
 			throw new Error(NOT_STRING(name));
 		}
 
-		this.controllers[name] = new AbortController();
+		if (!AbortController) {
+			this.controllers[name] = new _abortPolyfill() as AbortController;
+		} else {
+			this.controllers[name] = new AbortController();
+		}
 		Events.emit('create', { controller: name });
 	}
 
