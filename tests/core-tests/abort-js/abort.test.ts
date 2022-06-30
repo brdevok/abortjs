@@ -1,5 +1,5 @@
 import AbortJS from '../../../src';
-import { errors } from '../../../src/errors/errors';
+import { NOT_STRING } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.abort() method.', () => {
@@ -23,8 +23,8 @@ describe('Tests for AbortJS.abort() method.', () => {
 
 		expect.assertions(3);
 
-		failFn(() => AbortJS.abort(number as string), errors.NOT_STRING(number));
-		failFn(() => AbortJS.abort(array as string), errors.NOT_STRING(array));
-		failFn(() => AbortJS.abort(object as string), errors.NOT_STRING(object));
+		failFn(() => AbortJS.abort(number as string), NOT_STRING(number));
+		failFn(() => AbortJS.abort(array as string), NOT_STRING(array));
+		failFn(() => AbortJS.abort(object as string), NOT_STRING(object));
 	});
 });

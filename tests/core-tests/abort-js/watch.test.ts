@@ -1,8 +1,8 @@
 import AbortJS, { AbortCallback } from '../../../src/index';
 import { bulbasaur, pokemon } from '../../api';
 import axios, { AxiosResponse } from 'axios';
-import { errors } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
+import { NOT_FN, NOT_STRING } from '../../../src/errors/errors';
 
 type Bulbasaur = {
 	id: number;
@@ -91,32 +91,20 @@ describe('Tests for AbortJS.watch() method', () => {
 		// Passing wrong argument types to 1st arg.
 		failFn(
 			() => AbortJS.watch(number as string, async () => true),
-			errors.NOT_STRING(number),
+			NOT_STRING(number),
 		);
 		failFn(
 			() => AbortJS.watch(boolean as string, async () => true),
-			errors.NOT_STRING(boolean),
+			NOT_STRING(boolean),
 		);
 		failFn(
 			() => AbortJS.watch(array as string, async () => true),
-			errors.NOT_STRING(array),
+			NOT_STRING(array),
 		);
-		failFn(
-			() => AbortJS.watch(fn as string, async () => true),
-			errors.NOT_STRING(fn),
-		);
+		failFn(() => AbortJS.watch(fn as string, async () => true), NOT_STRING(fn));
 		// Testing 2nd arg.
-		failFn(
-			() => AbortJS.watch('x', number as AbortCallback),
-			errors.NOT_FN(number),
-		);
-		failFn(
-			() => AbortJS.watch('x', boolean as AbortCallback),
-			errors.NOT_FN(boolean),
-		);
-		failFn(
-			() => AbortJS.watch('x', object as AbortCallback),
-			errors.NOT_FN(object),
-		);
+		failFn(() => AbortJS.watch('x', number as AbortCallback), NOT_FN(number));
+		failFn(() => AbortJS.watch('x', boolean as AbortCallback), NOT_FN(boolean));
+		failFn(() => AbortJS.watch('x', object as AbortCallback), NOT_FN(object));
 	});
 });
