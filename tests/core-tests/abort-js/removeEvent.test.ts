@@ -1,7 +1,7 @@
 import AbortJS from '../../../src';
 import { Events } from '../../../src/core/events';
 import { EventCallback, EventsStack } from '../../../src/core/events.types';
-import { errors } from '../../../src/errors/errors';
+import { NOT_FN, NOT_STRING } from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests for AbortJS.removeEvent() method.', () => {
@@ -49,27 +49,27 @@ describe('Tests for AbortJS.removeEvent() method.', () => {
 
 		failFn(
 			() => AbortJS.removeEvent(number as keyof EventsStack, () => true),
-			errors.NOT_STRING(number),
+			NOT_STRING(number),
 		);
 		failFn(
 			() => AbortJS.removeEvent(array as keyof EventsStack, () => true),
-			errors.NOT_STRING(array),
+			NOT_STRING(array),
 		);
 		failFn(
 			() => AbortJS.removeEvent(object as keyof EventsStack, () => true),
-			errors.NOT_STRING(object),
+			NOT_STRING(object),
 		);
 		failFn(
 			() => AbortJS.removeEvent('create', number as EventCallback),
-			errors.NOT_FN(number),
+			NOT_FN(number),
 		);
 		failFn(
 			() => AbortJS.removeEvent('abort', array as EventCallback),
-			errors.NOT_FN(array),
+			NOT_FN(array),
 		);
 		failFn(
 			() => AbortJS.removeEvent('remove', object as EventCallback),
-			errors.NOT_FN(object),
+			NOT_FN(object),
 		);
 	});
 });

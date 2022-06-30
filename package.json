@@ -10,7 +10,11 @@
     "prettify": "npx prettier --write src, tests",
     "lint": "npx eslint src",
     "lint:fix": "npx eslint src --fix",
+<<<<<<< HEAD
     "publish": "git add . && git commit -m 'Publish package' && git push && npm run build && npm publish",
+=======
+    "publish": "git push && npm run build && npm publish",
+>>>>>>> main
     "v:patch": "npm version patch",
     "v:minor": "npm version minor",
     "v:major": "npm version mayor"
@@ -24,14 +28,22 @@
       "import": "./dist/esm/index.js"
     }
   },
-  "author": "brdevok",
+  "author": "brdevok <braianrosas1998@outlook.com> https://github.com/brdevok",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brdevok/abortjs"
+  },
   "description": "Small implementation of AbortController API for easy management of requests cancelation.",
   "license": "MIT",
   "keywords": [
     "abort",
     "fetch",
     "browser",
-    "signal"
+    "signal",
+		"abortcontroller",
+		"request",
+		"promise",
+		"whatwg"
   ],
   "devDependencies": {
     "@types/jest": "^28.1.2",
@@ -43,5 +55,8 @@
     "prettier": "^2.7.1",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0"
   }
 }

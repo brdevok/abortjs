@@ -1,7 +1,14 @@
 import { Events } from '../../../src/core/events';
 import { eventDataShape } from '../../../src/core/events.constants';
 import { EventData, EventsStack } from '../../../src/core/events.types';
-import { errors } from '../../../src/errors/errors';
+import {
+	NOT_OBJECT,
+	NOT_OBJ_KEY,
+	NOT_STRING,
+	WRONG_EVENT,
+	WRONG_OBJ_KEY,
+	WRONG_OBJ_VAL,
+} from '../../../src/errors/errors';
 import { failFn } from '../../utils/fail';
 
 describe('Tests form Events.emit() method.', () => {
@@ -23,47 +30,41 @@ describe('Tests form Events.emit() method.', () => {
 
 		failFn(
 			() => Events.emit(number as keyof EventsStack, data),
-			errors.NOT_STRING(number),
+			NOT_STRING(number),
 		);
 		failFn(
 			() => Events.emit(array as keyof EventsStack, data),
-			errors.NOT_STRING(array),
+			NOT_STRING(array),
 		);
-		failFn(
-			() => Events.emit(fn as keyof EventsStack, data),
-			errors.NOT_STRING(fn),
-		);
+		failFn(() => Events.emit(fn as keyof EventsStack, data), NOT_STRING(fn));
 
 		failFn(
 			() => Events.emit('create', number as EventData),
-			errors.NOT_OBJECT(number),
+			NOT_OBJECT(number),
 		);
-		failFn(
-			() => Events.emit('abort', array as EventData),
-			errors.NOT_OBJECT(array),
-		);
-		failFn(() => Events.emit('remove', fn as EventData), errors.NOT_OBJECT(fn));
+		failFn(() => Events.emit('abort', array as EventData), NOT_OBJECT(array));
+		failFn(() => Events.emit('remove', fn as EventData), NOT_OBJECT(fn));
 
 		failFn(
 			() => Events.emit(event as keyof EventsStack, data),
-			errors.WRONG_EVENT(event),
+			WRONG_EVENT(event),
 		);
 
 		failFn(
 			() => Events.emit('create' as keyof EventsStack, data1 as EventData),
-			errors.WRONG_OBJ_VAL(number, 'controller', 'string'),
+			WRONG_OBJ_VAL(number, 'controller', 'string'),
 		);
 		failFn(
 			() => Events.emit('create' as keyof EventsStack, data2 as EventData),
-			errors.WRONG_OBJ_VAL(array, 'controller', 'string'),
+			WRONG_OBJ_VAL(array, 'controller', 'string'),
 		);
 		failFn(
 			() => Events.emit('create' as keyof EventsStack, data3 as EventData),
-			errors.WRONG_OBJ_KEY('anyOtherKey', eventDataShape),
+			WRONG_OBJ_KEY('anyOtherKey', eventDataShape),
 		);
 		failFn(
 			() => Events.emit('create' as keyof EventsStack, data4 as EventData),
-			errors.NOT_OBJ_KEY('controller', eventDataShape),
+			NOT_OBJ_KEY('controller', eventDataShape),
 		);
 	});
 });
