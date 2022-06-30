@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Create CHANGELOG file.
 - Add repository URL and more author data to package.json.
+- Add support for older NodeJS versions and browsers. See [abort-controller](https://www.npmjs.com/package/abort-controller).
 
 ### Changed
 - Custom error messages functions are now exported individually instead as object methods.

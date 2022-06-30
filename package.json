@@ -25,17 +25,21 @@
     }
   },
   "author": "brdevok <braianrosas1998@outlook.com> https://github.com/brdevok",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/brdevok/abortjs"
-	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brdevok/abortjs"
+  },
   "description": "Small implementation of AbortController API for easy management of requests cancelation.",
   "license": "MIT",
   "keywords": [
     "abort",
     "fetch",
     "browser",
-    "signal"
+    "signal",
+		"abortcontroller",
+		"request",
+		"promise",
+		"whatwg"
   ],
   "devDependencies": {
     "@types/jest": "^28.1.2",
@@ -47,5 +51,8 @@
     "prettier": "^2.7.1",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0"
   }
 }
